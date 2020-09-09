@@ -1,0 +1,12 @@
+/*/dist/
+/*/debug/
+/*/build/
+/*/nbproject/private/
+/*/nbproject/*.properties
+/*/nbproject/*.mk
+/*/nbproject/*.bash
+**/*.bak
+**/*.o
+**/*.d
+**/*.elf
+**/*.map
