@@ -4,7 +4,7 @@
     "content": {
         "metaDataVersion": "1.1.0",
         "name": "com.microchip.mcu8.mplabx.project.avr128da48-cnano-i2c-send-receive-mplabx",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "displayName": "AVR128DA48 I2C Read Example",
         "projectName": "avr128da48-cnano-i2c-send-receive-mplabx",
         "shortDescription": "This application shows how to use the TWI0 as an I2C compatible master to communicate with two I2C slave devices: MCP3221 - equipped with a 12-bit ADC, and MCP23008 - equipped with an I/O Expander",
