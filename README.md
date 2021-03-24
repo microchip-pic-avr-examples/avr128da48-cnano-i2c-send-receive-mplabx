@@ -1,11 +1,8 @@
-<div id="readme" class="Box-body readme blob js-code-block-container">
- <article class="markdown-body entry-content p-3 p-md-6" itemprop="This needs to locked down and 'never' changed"><p><a href="https://www.microchip.com" rel="nofollow"><img src="images/Microchip.png" alt="MCHP" width="300";"></a></p>
+[![MCHP](images/microchip.png)](https://www.microchip.com)
 
-# AVR128DA48 I2C Read Example
+# Basic I2C Communication
 
-## Objective
-
-This example demonstrates the basic functionality of the TWI peripheral with a basic I2C communication, both reading and writing from/to the slave devices. The device is connected to the PICkit Serial I2C Demo Board to communicate with the MCP3221 and MCP23008 I2C slave devices. The AVR128DA48 will first scan the I2C bus to discover all devices available on the bus. A message will be transmitted through USART to indicate the addresses of the devices that respond with the acknowledge signal. A voltage will be read by the MCP3221 (equipped with a 12-bit ADC) and the result will be transmitted through I2C to the AVR128DA48 device. Then, the MCU will transmit an 8-bit sequence to the MCP23008, equipped with an I/O Expander, to drive 8 LEDs on an LED bar. The LED display (consisting in 8 LEDs) will indicate the potentiometer voltage value (divided in subranges).
+This example demonstrates the basic functionality of the TWI peripheral with a basic I2C communication, both reading and writing from/to the client devices. The device is connected to the PICkit Serial I2C Demo Board to communicate with the MCP3221 and MCP23008 I2C client devices. The AVR128DA48 will first scan the I2C bus to discover all devices available on the bus. A message will be transmitted through USART to indicate the addresses of the devices that respond with the acknowledge signal. A voltage will be read by the MCP3221 (equipped with a 12-bit ADC) and the result will be transmitted through I2C to the AVR128DA48 device. Then, the MCU will transmit an 8-bit sequence to the MCP23008, equipped with an I/O Expander, to drive 8 LEDs on an LED bar. The LED display (consisting in 8 LEDs) will indicate the potentiometer voltage value (divided in subranges).
 The software diagram of this application is presented in the figure below.
 <br><img src="images/soft_diagram.jpg" width="170">
 
@@ -18,7 +15,7 @@ The software diagram of this application is presented in the figure below.
 
 - MPLAB® X IDE 5.40 or newer [(microchip.com/mplab/mplab-x-ide)](http://www.microchip.com/mplab/mplab-x-ide)
 - MPLAB® XC8 2.20 or newer compiler [(microchip.com/mplab/compilers)](http://www.microchip.com/mplab/compilers)
-- AVR_Dx-DFP 1.4.75
+- AVR_Dx-DFP 1.4.75 or newer
 
 ## Hardware Used
 
@@ -65,12 +62,12 @@ The AVR128DA48 Curiosity Nano Development Board is used as the test platform. Th
 7. Select the AVR-DA COMn port and provide the correct configurations. Then, visualize the serial output on the terminal window. In this example, the I2C device scanning phase is described. The devices with the addresses 0x55, 0x56, and 0x57 responded with ACK.
 <br><img src="images/serial_result.png" width="600">
 
-After turning the potentiometer rotor one way and the other, the LEDs will indicate the level of that voltage, as presented below. The ADC conversion result is received from the 12-bit ADC - I2C slave device, it is normalized (obtaining a 3-bit value to be indicated using the 8-LED bar), and the result is transmitted to the 8-bit I/O Expander - I2C slave device.
+After turning the potentiometer rotor one way and the other, the LEDs will indicate the level of that voltage, as presented below. The ADC conversion result is received from the 12-bit ADC - I2C client device, it is normalized (obtaining a 3-bit value to be indicated using the 8-LED bar), and the result is transmitted to the 8-bit I/O Expander - I2C client device.
 <br><img src="images/I2C_LED_bar_Result.gif">
 
 ## Summary 
 
-This application shows how to use the TWI0 as an I2C compatible master to communicate with two I2C slave devices:
+This application shows how to use the TWI0 as an I2C compatible host to communicate with two I2C client devices:
 
 - MCP3221 - equipped with a 12-bit ADC
 - MCP23008 - equipped with an I/O Expander
