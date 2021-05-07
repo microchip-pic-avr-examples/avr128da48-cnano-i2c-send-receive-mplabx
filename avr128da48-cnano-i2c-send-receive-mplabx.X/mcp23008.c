@@ -1,7 +1,7 @@
 /*
     \file   mcp23008.c
 
-    \brief  8-bit I/O Expander I2C Slave Driver
+    \brief  8-bit I/O Expander I2C Client Driver
 
     (c) 2020 Microchip Technology Inc. and its subsidiaries.
 
@@ -27,11 +27,11 @@
 
 #include "mcp23008.h"
 
-/* Sends a command to the IO Expander I2C slave device 
+/* Sends a command to the IO Expander I2C client device 
  * - returns true if 2 bytes have been sent 
- * - return false if slave did not ACK/an unexpected number of bytes have been 
+ * - return false if client did not ACK/an unexpected number of bytes have been 
  * sent
- * The arguments are the address of the I2C slave device register and the data 
+ * The arguments are the address of the I2C client device register and the data 
  * to be written to that register
  */
 bool MCP23008_Write(uint8_t address, uint8_t data)
@@ -39,7 +39,7 @@ bool MCP23008_Write(uint8_t address, uint8_t data)
     uint8_t ret;
     uint8_t command[2] = {address, data};
     
-    ret = I2C_0_SendData((MCP23008_SLAVE_ADDR << 1), command, 2);
+    ret = I2C_0_SendData((MCP23008_CLIENT_ADDR << 1), command, 2);
     I2C_0_EndSession();
     
     if (ret == 2)

@@ -1,7 +1,7 @@
 /*
     \file   mcp3221.h
 
-    \brief  12-bit ADC I2C Slave Driver - header file
+    \brief  12-bit ADC I2C Client Driver - header file
 
     (c) 2020 Microchip Technology Inc. and its subsidiaries.
 
@@ -33,15 +33,15 @@
 #include <stdlib.h>
 #include "i2c.h"
 
-#define MCP3221_SLAVE_ADDR  0x4D
+#define MCP3221_CLIENT_ADDR  0x4D
 
 #ifdef	__cplusplus
 extern "C" {
 #endif /* __cplusplus */
 
-/* Reads the ADC conversion result from the 12-bit ADC I2C slave device
+/* Reads the ADC conversion result from the 12-bit ADC I2C client device
  * - returns true if 2 bytes have been received
- * - returns false if slave did not ACK, or an unexpected number of bytes has been received
+ * - returns false if client did not ACK, or an unexpected number of bytes has been received
  * Only one single word (uint16_t) variable must be allocated
  */
 bool MCP3221_Read(uint16_t *pData);

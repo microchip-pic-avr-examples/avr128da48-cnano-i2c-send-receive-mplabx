@@ -97,21 +97,21 @@ int main(void)
     }
 }
 
-/* Scans for I2C slave devices on the bus - that have an address within the 
+/* Scans for I2C client devices on the bus - that have an address within the 
  *specified range [addr_min, addr_max]
  */
 void main_i2c_scan(uint8_t addr_min, uint8_t addr_max)
 {
-    uint8_t slave_address, ret;
+    uint8_t client_address, ret;
     printf("\n\r I2C Scan started from 0x%02X to 0x%02X:", addr_min, addr_max);
-    for (slave_address = addr_min; slave_address <= addr_max; slave_address++)
+    for (client_address = addr_min; client_address <= addr_max; client_address++)
     {
-        printf("\n\r Scanning slave address = 0x%02X", (int)slave_address);
-        ret = I2C_0_SendData((slave_address<<1), NULL, 0);
+        printf("\n\r Scanning client address = 0x%02X", (int)client_address);
+        ret = I2C_0_SendData((client_address<<1), NULL, 0);
         I2C_0_EndSession();
         if(ret != 0xFF)
         {
-            printf(" --> slave ACKED");
+            printf(" --> client ACKED");
         }
         _delay_ms(10);
     }

@@ -53,7 +53,7 @@ void I2C_0_Init(void)
     /* Select I2C pins PC2/PC3 */
     PORTMUX.TWIROUTEA = 0x02;
     
-    /* Master Baud Rate Control */
+    /* Host Baud Rate Control */
     TWI0.MBAUD = TWI0_BAUD((I2C_SCL_FREQ), 0.3);
     
     /* Enable TWI */ 
@@ -78,7 +78,7 @@ static uint8_t i2c_0_WaitW(void)
         {
             if(!(TWI0.MSTATUS & TWI_RXACK_bm))
             {
-                /* slave responded with ack - TWI goes to M1 state */
+                /* client responded with ack - TWI goes to M1 state */
                 state = I2C_ACKED;
             }
             else
@@ -117,12 +117,12 @@ static uint8_t i2c_0_WaitR(void)
     return state;
 }
 
- /* Returns how many bytes have been sent, -1 means NACK at address, 0 means slave ACKed to slave address */
+ /* Returns how many bytes have been sent, -1 means NACK at address, 0 means client ACKed to client address */
 uint8_t I2C_0_SendData(uint8_t address, uint8_t *pData, uint8_t len)
 {
     uint8_t retVal = (uint8_t) - 1;
     
-    /* start transmitting the slave address */
+    /* start transmitting the client address */
     TWI0.MADDR = address & ~0x01;
     if(i2c_0_WaitW() != I2C_ACKED)
         return retVal;
@@ -139,7 +139,7 @@ uint8_t I2C_0_SendData(uint8_t address, uint8_t *pData, uint8_t len)
                 pData++;
                 continue;
             }
-            else // did not get ACK after slave address
+            else // did not get ACK after client address
             {
                 break;
             }
@@ -154,7 +154,7 @@ uint8_t I2C_0_GetData(uint8_t address, uint8_t *pData, uint8_t len)
 {
     uint8_t retVal = (uint8_t) - 1;
     
-    /* start transmitting the slave address */
+    /* start transmitting the client address */
     TWI0.MADDR = address | 0x01;
     if(i2c_0_WaitW() != I2C_ACKED)
         return retVal;
